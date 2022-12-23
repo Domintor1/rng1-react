@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './styles.css';
 import reportWebVitals from './reportWebVitals';
@@ -7,25 +7,34 @@ import reportWebVitals from './reportWebVitals';
 
 
 const RNG = function () {
+  const [minVal, setMinVal] = useState(0);
+  const [maxVal, setMaxVal] = useState(10);
+  const [randomNum, setRandomNum] = useState(5);
+
+  const getRandomNum = () => {
+       setRandomNum(Math.floor(Math.random() * (maxVal - minVal + 1) + minVal))
+  }
+
+
   return (
     <div className='hero'>
       <div className='container'>
         <div className='randomNum'>
           <p>
-            Random number: <span> 5</span>
+            Random number: <span> {randomNum} </span>
           </p>
         </div>
         <div className='numContainer'>
           <div>
             <p>Min:</p>
-            <input type='number' />
+            <input type='number' value={minVal} onChange={e => setMinVal(+e.target.value)}/>
           </div>
           <div>
-            <p>Min:</p>
-            <input type='number' />
+            <p>Max:</p>
+            <input type='number' value={maxVal} onChange={e=> setMaxVal(+e.target.value)}/>
           </div>
         </div>
-        <button>Get Random Number</button>
+        <button onClick={getRandomNum}>Get Random Number</button>
       </div>
     </div>
   )

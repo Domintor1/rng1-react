@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './styles.css';
-import reportWebVitals from './reportWebVitals';
-
-
-
 
 const RNG = function () {
   const [minVal, setMinVal] = useState(0);
@@ -12,7 +8,12 @@ const RNG = function () {
   const [randomNum, setRandomNum] = useState(5);
 
   const getRandomNum = () => {
-       setRandomNum(Math.floor(Math.random() * (maxVal - minVal + 1) + minVal))
+
+      if(maxVal > minVal) {
+        setRandomNum(Math.floor(Math.random() * (maxVal - minVal + 1) + minVal))
+      } else {
+        return "Max value must be higher than min value"
+      }
   }
 
 
@@ -40,11 +41,6 @@ const RNG = function () {
   )
 }
 
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
